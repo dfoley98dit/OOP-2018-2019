@@ -28,6 +28,7 @@ public class Main
         processing.core.PApplet.runSketch( a, new Arrays());
 		
 	}
+<<<<<<< HEAD
 
 	public void starMap()
 	{
@@ -37,10 +38,30 @@ public class Main
 	}
 	
 
+=======
+>>>>>>> 564abae82e8d3f647640a971484e0adc3b32b6f0
 	
+	public void starMap()
+	{
+		String[] a = {"MAIN"};
+        processing.core.PApplet.runSketch( a, new StarMap());
+		
+	}
+	
+	public void cafeRubis()
+	{
+		String[] a = {"MAIN"};
+        processing.core.PApplet.runSketch( a, new CafeRubis());
+		
+	}
+
 	public static void main(String[] args)
 	{
 		Main main = new Main();
+<<<<<<< HEAD
 		main.starMAp();			
+=======
+		main.cafeRubis();			
+>>>>>>> 564abae82e8d3f647640a971484e0adc3b32b6f0
 	}
 }
