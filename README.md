@@ -23,10 +23,182 @@ Resources
 - Week 12 Assignment Submission - 30%
 - End of Year exam - 50%
 
+# Week 7 - Making a Ship class for the YASC game
+- [Download YASC on Itch with full source code](https://skooter500.itch.io/yasc)
+- [Classes in Java](https://docs.oracle.com/javase/tutorial/java/javaOO/classes.html)
+- [Classes in Processing](https://processing.org/reference/class.html)
+- [translate](https://processing.org/reference/translate_.html)
+- [rotate](https://processing.org/reference/rotate_.html)
+- [pushMatrix](https://processing.org/reference/pushMatrix_.html)
+- [The Unit circle](https://www.khanacademy.org/math/algebra2/trig-functions/unit-circle-definition-of-trig-functions-alg2/v/unit-circle-definition-of-trig-functions-1)
+
+## Lab
+### Learning outcomes
+- Know how to make a class in Java that has state and behaviour
+- Know how to use translate, rotate, pushMatrix and popMatrix
+- Know how to fork a repository and set the upstream remote
+
+In Monday's class, we went through an example of making a class to encapsulate the state and behaviour of a Ship in a computer game. We also looked at the starter code for the assignment.
+
+If you haven't already, fork [the starter code for the assignment](https://github.com/skooter500/SciFiUI) and set the upstream remote. If you have already done this then *update your fork from my repository now* as I made a small change after Monday's class. Check these out if you need a reminder on how to do any of this:
+
+- [Forking a repository](https://help.github.com/en/articles/fork-a-repo)
+- [Syncing a fork](https://help.github.com/en/articles/syncing-a-fork)
+
+Also update your fork of this repository to get the code we wrote in the class on Monday. 
+
+Study the Ship example we made and make sure you know how it works. Make sure you understand:
+
+- Fields
+- Accessors
+- Parameterised constructor
+- Default constructor
+- Constructor chaining
+- Why YASC is passed into the constructor
+- rotate, translate, pushMatrix and popMatrix
+
+Ok! Your task today is to use what you learned in Monday's class to make a Radar class in your *assignment* repo:
+
+[![YouTube](http://img.youtube.com/vi/SQ3mj3u00T8/0.jpg)](https://www.youtube.com/watch?v=SQ3mj3u00T8)
+
+
+Make a class called Radar, with appropriate fields, accessors, constructors and methods 
+You can use either trigonometry or rotate and translate in your solution.
+
+Work on other UI elements for you assignment.
+
+# Week 6 - More on classes & ArrayLists & the map function
+- [map](https://processing.org/reference/map_.html)
+
+## Lab
+### Learning Outcomes
+- Know how to make a class with private fields, accessors and a constructor
+- Know how to load a CSV file
+- Know how to iterate over an arraylist
+- Get some practice for your upcoming lab test
+
+Try [this lab test](https://github.com/skooter500/OOP_Labtest1_2017_Starter) from last year
+[Solution in pure Processing]()
+
 # Week 5 - Classes & ArrayLists
 
 - [2016 Lab test](https://github.com/skooter500/OOP-LabTest1-2016)
-- [Solution](https://github.com/skooter500/StarMap)
+
+A video from Monday's class:
+
+[![YouTube](http://img.youtube.com/vi/bkLtktd7yCk/0.jpg)](https://www.youtube.com/watch?v=bkLtktd7yCk)
+
+## Lab 5 
+## Learning Outcomes
+- Learn how to fork a git repository
+- Learn how to use the Processing map function
+- Learn how to iterate over an ArrayList
+- Use accessor methods
+
+In todays lab we will plot the elements from the ArrayList of Star objects to the screen
+
+Firstly! If you havent already, fork the repository for the course to your own git repository. To do this, login to github, find my repositoy and hit the fork button. Now you have a personal copy of the repository stored in your github account that you can commit to and also keep updated from my repository.
+
+Clone your fork by typing:
+
+```
+git clone URL_TO_YOUR_REPO
+```
+
+Replace URL_TO_YOUR_REPO with the URL to your repo. It will be something like
+
+```
+http://github.com/JimKirkStudent/OOP-2018-2019
+```
+
+Check to make sure the remotes are set correctly by typing:
+
+```
+cd OOP-2018-2019
+git remote -v
+```
+
+You should see something like this:
+
+```
+origin        http://github.com/JimKirkStudent/OOP-2018-2019 (fetch)
+origin        http://github.com/JimKirkStudent/OOP-2018-2019 (push)
+upstream  http://github.com/skooter500/OOP-2018-2019 (fetch)
+upstream  http://github.com/skooter500/OOP-2018-2019 (push)
+```
+
+*origin* should alias your repository and *upstream* should alias my repository. You might need to add the upstream if you just did the fork and clone: 
+
+```
+git remote add upstream THE_URL
+```
+
+You can also modify an alias by typing:
+
+```
+git remote set-url origin THE_URL
+```
+
+Where origin in the above is the alias you want to update. You can update the upstream alias in a similar manner.
+
+Let's keep the master branch clean and never commit code on it. Instead, create and push branches for your work. 
+
+You can pull my changes into your master branch by typing:
+
+```
+git checkout master
+git pull upstream master
+```
+
+This checks out your master branch if it is not already checked out and then pulls from my upstream branch into your local master branch. Commit and push your changes:
+
+```
+git add .
+git commit -m "message"
+git push
+```
+
+Ok! If you want a refresher on what we did in Monday's class, watch the video above.
+
+The goal of today's lab is to plot the dataset we loaded into the ArrayList. Make sure you study the code from Monday before you move on. [Here is some more documentation on the ArrayList you can read](https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html).
+
+Basically, to add an element use:
+
+```Java
+Star s = new Star();
+al.add(s);
+```
+
+To retrieve an element use:
+
+```Java
+Star s = al.get(i);
+```
+
+Or iterate over the ArrayList using:
+
+```Java
+for(Star s:stars)
+{
+	...
+	...
+}
+```
+
+Here is what the finished program should look like:
+
+[![YouTube](http://img.youtube.com/vi/J2kHSSFA4NU/0.jpg)](https://www.youtube.com/watch?v=J2kHSSFA4NU)
+
+- Create a branch in your forked repository for your code today
+- read about the processing [map](https://processing.org/reference/map_.html) function. It's super useful.
+- Write a method in the StarMap class called ```drawGrid``` that draws the grid lines and the numbers along the grid. Use the map function!
+- Write a method called ```drawStars``` that plots the stars onto the grid, using the *xG* and *yG* fields in the star to map onto the grid. Use the accessor methods on the Star objects. 
+- Draw a yellow cross at the center of the star and a circle of diameter *absMag* field of the star. To do this you will have to iterate over the ArrayList of Star's 
+- Use the text method to print the name of the star. You can use the textAlign method to align the text. Look these up in the Processing reference if you need.
+
+Advanced!
+
+In the video, you can click on a start and then click on a second star to print the distance between them. See if you can implement this!
 
 # Week 4 - Arrays
 - [Arrays](https://docs.oracle.com/javase/8/docs/api/java/util/Arrays.html)
