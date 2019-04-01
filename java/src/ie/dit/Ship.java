@@ -2,23 +2,21 @@ package ie.dit;
 
 import processing.core.PVector;
 
-public class Ship
+public class Ship extends GameObject
 {
-    private PVector pos;
-    private PVector forward;
-    private float speed;
     private float size;
-    private YASC yasc;
 
-    private float rotation;
+    public int fireRate;
+
+    private float toPass;
+    private float ellapsed;
 
     public Ship(YASC yasc, float x, float y, float speed, float size)
     {
-        this.yasc = yasc;
-        pos = new PVector(x, y);
-        forward = new PVector(0, -1);
-        this.speed = speed;
+        super(yasc, x, y, 0, speed);
         this.size = size;
+        fireRate = 20;
+        toPass = 1 / (float) fireRate;
 
     }
 
@@ -29,6 +27,7 @@ public class Ship
         yasc.rotate(rotation);
         
         float halfSize = size / 2;
+        yasc.stroke(0);
         yasc.line(- halfSize, halfSize, 0, - halfSize);
         yasc.line(0, - halfSize
         , halfSize, halfSize);
@@ -41,12 +40,12 @@ public class Ship
 
     public void update()
     {
+
         forward.x = (float) Math.sin(rotation);
         forward.y = - (float) Math.cos(rotation);
         if (yasc.checkKey('w'))
         {
-            pos.x += forward.x;
-            pos.y += forward.y;
+            pos.add(forward);
         }
 
         if (yasc.checkKey('s'))
@@ -64,62 +63,18 @@ public class Ship
         {
             rotation += 0.1f;
         }
+
+        if (yasc.checkKey(' ') && ellapsed >= toPass)
+        {
+            PVector spawnPoint = PVector.add(pos, PVector.mult(forward, 25));
+            Bullet b = new Bullet(yasc, spawnPoint.x, spawnPoint.y, rotation + yasc.random(-0.1f, 0.1f));
+            yasc.gameObjects.add(b);
+            ellapsed = 0;
+        }
+        ellapsed += yasc.timeDelta;
+        yasc.text("Ellapsed: "+ ellapsed, 10, 200);
     }
 
-
-    /**
-     * @return the pos
-     */
-    public PVector getPos() {
-        return pos;
-    }
-
-    /**
-     * @param pos the pos to set
-     */
-    public void setPos(PVector pos) {
-        this.pos = pos;
-    }
-
-    /**
-     * @return the speed
-     */
-    public float getSpeed() {
-        return speed;
-    }
-
-    /**
-     * @param speed the speed to set
-     */
-    public void setSpeed(float speed) {
-        this.speed = speed;
-    }
-
-    /**
-     * @return the size
-     */
-    public float getSize() {
-        return size;
-    }
-
-    /**
-     * @param size the size to set
-     */
-    
-
-	/**
-	 * @return the yasc
-	 */
-	public YASC getYasc() {
-		return yasc;
-	}
-
-	/**
-	 * @param yasc the yasc to set
-	 */
-	public void setYasc(YASC yasc) {
-		this.yasc = yasc;
-    }
     public void setSize(float size) {
         this.size = size;
     }
