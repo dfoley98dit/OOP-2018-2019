@@ -13,6 +13,7 @@ public class Audio2 extends PApplet{
 
     Minim minim;
     AudioInput ai;
+    FFT fft; 
 
     // public void setup()
     // {
@@ -24,6 +25,7 @@ public class Audio2 extends PApplet{
         size(FRAME_SIZE, 800);
         minim = new Minim(this);
         ai = minim.getLineIn(Minim.MONO,FRAME_SIZE,SAMPLE_RATE,RESOLUTION);
+        fft = new fft(FRAME_SIZE,SAMPLE_RATE);
     }
     
     float lerpedAverage = 0;
@@ -52,7 +54,12 @@ public class Audio2 extends PApplet{
         fill(map(lerpedAverage, 0, 1, 0, 255), 255, 255);
         ellipse(width / 2, 100, lerpedAverage * 900, lerpedAverage * 900);
 
+        fft.forward(ai.left);
 
+        for(int i =0; i < fft.specSize(); i ++)
+        {
+            line(i, 0, i, fft.getBand(i) * 100);
+        }
 
         
     }
