@@ -1,11 +1,17 @@
 package ie.dit;
 
+import java.util.ArrayList;
+
 import processing.core.PApplet;
 
 public class YASC extends PApplet
 {
-    Ship s;
     boolean[] keys = new boolean[1024];
+
+    public ArrayList<GameObject> gameObjects = new ArrayList<GameObject>(); 
+
+    AIShip aiShip;
+    Ship ship;
 
     public void keyPressed()
     {
@@ -23,20 +29,53 @@ public class YASC extends PApplet
     
     public void settings()
     {
-        size(800, 800);
-
+        size(500, 500);        
     }
 
     public void setup()
     {
-        s = new Ship(this, width / 2, height / 2, 5, 50);
+        ship = new Ship(this, width / 2, height / 2, 5, 50);
+        gameObjects.add(ship);
+        aiShip = new AIShip(this, 100, 100, 5, 50);
+        gameObjects.add(aiShip);
+        gameObjects.add(new AmmoPowerup(this));
+        gameObjects.add(new AmmoPowerup(this));
+
+
+        String s = "Hello";
+        System.out.println(s.substring(2));
+        System.out.println(s.substring(2, 4));
+        System.out.println(s.indexOf("ll"));
+        System.out.println(s.startsWith("Hel"));
+        System.out.println(s.endsWith("x"));
     }
 
+    public float timeDelta;
+    private float last;
     public void draw()
     {
+        float now = millis();
+        timeDelta = (now - last) / 1000.0f;
+        last = now;
         background(255);
-        s.render();
-        s.update();
+        
+        fill(0);
+        text("GameObjects: " + gameObjects.size(), 50, 100);
+        for(int i= gameObjects.size() - 1; i >= 0; i--)
+        {
+            GameObject b = gameObjects.get(i);
+            b.render();
+            b.update();
+
+            if (b instanceof Powerup)
+            {
+                if (dist(b.pos.x, b.pos.y, ship.pos.x, ship.pos.y) < 50)
+                {
+                    ((Powerup)b).applyTo(ship);
+                    gameObjects.remove(b);
+                }
+            }
+        }        
     }
 
 
